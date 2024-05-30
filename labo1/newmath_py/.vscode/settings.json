@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./newmath_py/src"
+    ]
+}
