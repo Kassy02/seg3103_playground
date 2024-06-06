@@ -149,4 +149,93 @@ class DateTest {
     );
   }
 
+  @Test
+    void testLeapYear() {
+        assertTrue(new Date(2020, 2, 29).isLeapYear());
+        assertFalse(new Date(2021, 2, 28).isLeapYear());
+        assertTrue(new Date(2000, 2, 29).isLeapYear());
+        assertFalse(new Date(1900, 2, 28).isLeapYear());
+    }
+
+    @Test
+    void testToString() {
+        Date date = new Date(2024, 6, 6);
+        assertEquals("2024/June/6", date.toString());
+    }
+
+    @Test
+    void testEquals() {
+        Date date1 = new Date(2024, 6, 6);
+        Date date2 = new Date(2024, 6, 6);
+        Date date3 = new Date(2024, 6, 7);
+
+        assertTrue(date1.equals(date2));
+        assertFalse(date1.equals(date3));
+    }
+
+    @Test
+    void setDay_valid() {
+        Date date = new Date(2024, 6, 6);
+        date.setDay(15);
+        assertEquals(15, date.getDay());
+    }
+
+    @Test
+    void setDay_invalid() {
+        Date date = new Date(2024, 6, 6);
+        assertThrows(IllegalArgumentException.class, () -> date.setDay(0));
+        assertThrows(IllegalArgumentException.class, () -> date.setDay(32));
+        assertThrows(IllegalArgumentException.class, () -> date.setDay(31)); // June has 30 days
+    }
+
+    @Test
+    void setMonth_valid() {
+        Date date = new Date(2024, 6, 6);
+        date.setMonth(12);
+        assertEquals(12, date.getMonth());
+    }
+
+    @Test
+    void setMonth_invalid() {
+        Date date = new Date(2024, 6, 6);
+        assertThrows(IllegalArgumentException.class, () -> date.setMonth(0));
+        assertThrows(IllegalArgumentException.class, () -> date.setMonth(13));
+    }
+
+    @Test
+    void setYear_valid() {
+        Date date = new Date(2024, 6, 6);
+        date.setYear(2025);
+        assertEquals(2025, date.getYear());
+    }
+
+    @Test
+    void setYear_invalid() {
+        Date date = new Date(2024, 6, 6);
+        assertThrows(IllegalArgumentException.class, () -> date.setYear(-1));
+    }
+
+    @Test
+    void testIsEndOfMonth() {
+        Date date1 = new Date(2024, 1, 31);
+        assertTrue(date1.isEndOfMonth());
+        
+        Date date2 = new Date(2024, 2, 29); // leap year
+        assertTrue(date2.isEndOfMonth());
+
+        Date date3 = new Date(2021, 2, 28); // non-leap year
+        assertTrue(date3.isEndOfMonth());
+        
+        Date date4 = new Date(2024, 4, 30); // 30-day month
+        assertTrue(date4.isEndOfMonth());
+        
+        Date date5 = new Date(2024, 4, 29);
+        assertFalse(date5.isEndOfMonth());
+    }
+
+    @Test
+    void testIsThirtyDayMonth() {
+        assertTrue(new Date(2024, 4, 1).isThirtyDayMonth());
+        assertFalse(new Date(2024, 1, 1).isThirtyDayMonth());
+    }
 }
