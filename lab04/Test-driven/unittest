@@ -1,0 +1,35 @@
+# test_task_list.py
+
+import unittest
+from task_list import TaskList
+
+class TestTaskList(unittest.TestCase):
+    def test_add_task(self):
+        task_list = TaskList()
+        task_list.add_task("Task 1")
+        self.assertEqual(len(task_list.get_tasks()), 1)
+
+if __name__ == '__main__':
+    unittest.main()
+    # task_list.py
+
+class TaskList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        pass  # Placeholder implementation for now
+
+    def get_tasks(self):
+        return self.tasks
+    # task_list.py
+
+class TaskList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def get_tasks(self):
+        return self.tasks
