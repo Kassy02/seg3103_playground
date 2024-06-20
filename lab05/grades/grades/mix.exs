@@ -41,7 +41,10 @@ defmodule Grades.MixProject do
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:ecto_sql, "~> 3.6"},
+      {:postgrex, ">= 0.0.0"}
+
     ]
   end
 
