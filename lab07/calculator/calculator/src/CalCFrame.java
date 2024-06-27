@@ -370,12 +370,7 @@ public void showAnswer( String s )
 //value.  If doubleclick is true, the program ignores the input
 //==============================================================================
 public boolean clickCheck( String s ) {
-  if ( s == "" )
-    doubleclick = true;
-  else 
-    doubleclick = false;
-    
-  return doubleclick;
+  return s != null && s.isEmpty();
 }
 
 //==============================================================================
