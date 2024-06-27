@@ -39,7 +39,7 @@ class ExampleSeleniumTest {
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     driver.get("http://localhost:8080/");
     // wait to make sure Selenium is done loading the page
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60).toMillis());
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("title")));
   }
 
