@@ -3,16 +3,13 @@ package selenium;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
-
 import java.util.concurrent.TimeUnit;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -26,20 +23,19 @@ class ExampleSeleniumTest {
   public static void setUpBeforeClass() throws Exception {
     ProcessBuilder pb = new ProcessBuilder("java", "-jar", "bookstore5.jar");
     server = pb.start();
+    // Wait for the server to start
+    Thread.sleep(5000);
   }
 
   @BeforeEach
   void setUp() {
-    // Pick your browser
-    // driver = new FirefoxDriver();
-    // driver = new SafariDriver();
     WebDriverManager.chromedriver().setup();
     driver = new ChromeDriver();
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     driver.get("http://localhost:8080/");
     // wait to make sure Selenium is done loading the page
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10).toMillis());
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("title")));
   }
 
@@ -81,3 +77,5 @@ class ExampleSeleniumTest {
     return s.split("\\s+");
   }
 }
+
+
