@@ -83,5 +83,18 @@ defmodule Grades.CalculatorTest do
       input = %{homework: [0.7, 0.7], labs: [0.7, 0.7], midterm: 0.7, final: 0.7}
       assert Calculator.numeric_grade(input) == 6
     end
+
+    # Additional tests to achieve 100% branch coverage
+    @tag :numeric
+    test "resulting in 0 with too few labs" do
+      input = %{homework: [0.9, 0.9], labs: [0.1], midterm: 0.9, final: 0.9}
+      assert Calculator.numeric_grade(input) == 0
+    end
+
+    @tag :numeric
+    test "resulting in 0 with too low average" do
+      input = %{homework: [0.5, 0.6], labs: [0.9, 0.8], midterm: 0.55, final: 0.65}
+      assert Calculator.numeric_grade(input) == 0
+    end
   end
 end
