@@ -67,30 +67,16 @@ public CalCFrame(String title) {
     
   //initialize and add buttons  
   for ( int i = 0; i < 19; i++ ) {
-    buttons[i] = new JButton( buttonText[i] );   
-    buttons[i].setFont( buttonfont );
-    buttons[i].addActionListener( this );
-    
-    if ( i <= 2 )
-        getContentPane().add( buttons[i] );
-    else if ( i >= 3 && i <= 7)
-        getContentPane().add( buttons[i] );
-    else if ( i >=8 && i <= 12 )
-        getContentPane().add( buttons[i] );
-    else if ( i >= 13 && i <= 17 )
-        getContentPane().add( buttons[i] );
-    else
-        getContentPane().add( buttons[i] );
-       
-    if ( i == 2 )
-        getContentPane().add( new JLabel( "  " ) );
-    else if ( i == 7 )
-        getContentPane().add( new JLabel( "  " ) );
-    else if ( i == 12 )
-        getContentPane().add( new JLabel( "  " ) );
-    else if ( i == 17 )
-        getContentPane().add( new JLabel( "  " ) );
-          
+    getContentPane().add(buttons[i]);
+
+    // Define the indices where JLabels should be added
+    int[] labelIndices = {2, 7, 12, 17};
+
+    // Add JLabels at specific indices
+    for (int labelIndex : labelIndices) {
+        if (i == labelIndex) {
+            getContentPane().add(new JLabel("  "));
+            break; // No need to check further once a match is found
     }     
    buttons[15].setForeground( Color.red ); 
    result.setBackground( Color.white );          
@@ -369,12 +355,13 @@ public void showAnswer( String s )
 //Method clickCheck determines if the user double clicked and returns a boolean
 //value.  If doubleclick is true, the program ignores the input
 //==============================================================================
-public boolean clickCheck( String s ) {
-  if ( s == "" )
+public boolean clickCheck(String s) {
+  if (s.equals("")) { // Check if s is an empty string
     doubleclick = true;
-  else 
+  } else {
     doubleclick = false;
-    
+  }
+  
   return doubleclick;
 }
 
